@@ -12,6 +12,22 @@ class FritosObject {
         return new FritosObject([...new Set(parents)]);
     }
 
+    ancestor(selector) {
+        // TODO bíða þanga til kennari svara um ancestor behaviour :DD
+        const ancestor = new Set();
+
+        this.elements.forEach(a => {
+            let current = a.parentElement;
+            while (current) {
+                if (!selector || current.matches(selector)) {
+                    ancestor.add(current);
+                }
+                current = current.parentElement;
+            }
+        });
+
+        return new FritosObject([...ancestor]);
+    }
 }
 
 
@@ -26,9 +42,16 @@ window.fritos = fritos;
 // TESTING
 
 
-// 3. PARENT
+// 4. PARENT
 const parent = fritos('input[type="password"]').parent();
 const unknownParent = fritos('#password').parent('div');
 
 console.log(parent.elements);
 console.log(unknownParent.elements);
+
+// 5. ANCESTOR
+const ancestor1 = fritos('.item-image').ancestor(); // Returns the first ancestor <div class="item"></div>
+const ancestor2 = fritos('.item-image').ancestor('main')  // Returns the ancestor <main></main>
+
+console.log(ancestor1.elements);
+console.log(ancestor2.elements);
