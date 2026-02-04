@@ -1,19 +1,3 @@
-
-
-
-
-// query selector function
-// function fritos(query) {
-//   return {
-//     elements: document.querySelectorAll(query)
-//   };
-// }
-
-// var fritos = {
-
-
-// }
-
 class FritosObject {
     constructor(elements) {
         this.elements = Array.from(elements).filter(Boolean);
