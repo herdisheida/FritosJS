@@ -3,10 +3,13 @@ class FritosObject {
         this.elements = Array.from(elements).filter(Boolean);
     }
 
-    parent() {
-        const parents = this.elements.map(el => el.parentElement).filter(Boolean);
-        return new FritosObject([...new Set(parents)] // remove duplicates
-        );
+    parent(selector) {
+        let parents = this.elements.map(p => p.parentElement).filter(Boolean);
+
+        if (selector) {
+            parents = parents.filter(p => p.matches(selector));
+        }
+        return new FritosObject([...new Set(parents)]);
     }
 }
 
