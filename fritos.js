@@ -3,6 +3,11 @@ class FritosObject {
         this.elements = Array.from(elements).filter(Boolean);
     }
 
+
+    /**
+     * @param {string} selector 
+     * @returns {FritosObject}
+     */
     parent(selector) {
         let parents = this.elements.map(p => p.parentElement).filter(Boolean);
 
@@ -12,6 +17,11 @@ class FritosObject {
         return new FritosObject([...new Set(parents)]);
     }
 
+
+    /**
+     * @param {string} selector 
+     * @returns 
+     */
     ancestor(selector) {
         // TODO bíða þanga til kennari svara um ancestor behaviour :DD
         const ancestor = new Set();
@@ -27,6 +37,15 @@ class FritosObject {
         });
 
         return new FritosObject([...ancestor]);
+    }
+
+    
+    /**
+     * @param {object} cssProperties 
+     * @param {object} animationOptions 
+     */
+    animate(cssProperties, animationOptions) {
+
     }
 }
 
