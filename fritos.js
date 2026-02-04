@@ -24,19 +24,10 @@ window.fritos = fritos;
 
 // TESTING
 
-// console.log(fritos("p").parent());          // returns wrapper of parents
-// console.log(fritos("p").parent().parent()); // chaining works if parent() returns wrapper
 
-// const inputs = fritos('#my-form input');
-// console.log(inputs);
+// 3. PARENT
+const parent = fritos('input[type="password"]').parent();
+const unknownParent = fritos('#password').parent('div');
 
-// Chained method
-fritos('input').parent('form') //.onEvent('input', function(event) {
-//     alert('Something happened');
-// });
-
-// console.log(fritos('input').parent('form'));
-
-
-const test = fritos( "p" ).parent( ".selected" ) //.css( "background", "yellow" );
-console.log( test.elements );
+console.log(parent.elements);
+console.log(unknownParent.elements);
