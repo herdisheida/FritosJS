@@ -5,7 +5,7 @@ class FritosObject {
 
 
     /**
-     * @param {string} selector 
+     * @param {string} selector - optional
      * @returns {FritosObject}
      */
     parent(selector) {
@@ -19,7 +19,7 @@ class FritosObject {
 
 
     /**
-     * @param {string} selector 
+     * @param {string} selector - optional
      * @returns 
      */
     ancestor(selector) {
@@ -39,13 +39,67 @@ class FritosObject {
         return new FritosObject([...ancestor]);
     }
 
-    
+
     /**
      * @param {object} cssProperties 
      * @param {object} animationOptions 
      */
-    animate(cssProperties, animationOptions) {
+    animate(cssProperties, animationOptions) {  // TODO
 
+    }
+
+
+    /**
+     * @param {string} selector 
+     * @returns {FritosObject}
+     */
+    find(selector) {  // TODO
+        // return new FritosObject([...new Set(parents)]);
+    }
+
+    onEvent(eventType, eventFunction) {  // TODO
+
+    }
+
+    /**
+     * @param {string} externalURL 
+     * @param {*} HTTPRequestOptions - method, timeout, headers, body, onSuccess, onError.
+     */
+    remoteCall(externalURL, HTTPRequestOptions) {  // TODO
+
+    }
+
+
+    validation(someParameters) { // TODO
+
+    }
+
+
+    hide() {
+        // TODO
+    }
+
+    prune() {
+        // TODO
+    }
+
+
+    /**
+     * @param {int} level - default 1
+     */
+    raise(level) { // TODO
+
+    }
+
+    attrs(attributeName, value) { // TODO
+
+    }
+
+    /**
+     * @param {*} value - optional
+     */
+    val(value) {
+        // TODO
     }
 }
 
