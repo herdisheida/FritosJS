@@ -11,6 +11,7 @@ class FritosObject {
         }
         return new FritosObject([...new Set(parents)]);
     }
+
 }
 
 
