@@ -21,7 +21,8 @@ class FritosObject {
 
     parent() {
         const parents = this.elements.map(el => el.parentElement);
-        return new FritosObject(parents);
+        return new FritosObject([...new Set(parents)] // remove duplicates
+        );
     }
 }
 
@@ -32,3 +33,7 @@ function fritos(selector) {
 }
 
 window.fritos = fritos;
+
+
+console.log(fritos("p").parent());          // returns wrapper of parents
+console.log(fritos("p").parent().parent()); // chaining works if parent() returns wrapper
