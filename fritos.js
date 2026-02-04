@@ -35,5 +35,10 @@ function fritos(selector) {
 window.fritos = fritos;
 
 
-console.log(fritos("p").parent());          // returns wrapper of parents
-console.log(fritos("p").parent().parent()); // chaining works if parent() returns wrapper
+// TESTING
+
+// console.log(fritos("p").parent());          // returns wrapper of parents
+// console.log(fritos("p").parent().parent()); // chaining works if parent() returns wrapper
+
+const inputs = fritos('#my-form input');
+console.log(inputs);
