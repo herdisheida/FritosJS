@@ -150,6 +150,7 @@ window.fritos = fritos;
 const parent = fritos('input[type="password"]').parent();
 const unknownParent = fritos('#password').parent('div');
 
+console.log("4. PARENT");
 console.log(parent.elements);
 console.log(unknownParent.elements);
 
@@ -157,5 +158,23 @@ console.log(unknownParent.elements);
 const ancestor1 = fritos('.item-image').ancestor(); // Returns the first ancestor <div class="items"></div>
 const ancestor2 = fritos('.item-image').ancestor('main')  // Returns the ancestor <main></main>
 
+console.log("5. ANCESTOR");
 console.log(ancestor1.elements);
 console.log(ancestor2.elements);
+
+// 6. ANIMATE
+console.log("6. ANIMATE");
+fritos('.moveable-item').animete({
+    transform: 'translateX(100px)'
+}, {
+    // Time in milliseconds
+    duration: 1000,
+    // time, 'initial', 'inherit'
+    delay: '2s',
+    // ease, linear, ease-in, ease-in-out, cubic-bezier(n, n, n, n)
+    easing: 'linear',
+    // number, 'infinite', 'initial', 'inherit'
+    iterationCount: 1,
+    // none, forwards, backwards, both, initial, inherit
+    fillMode: 'none'
+})
