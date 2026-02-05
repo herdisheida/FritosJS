@@ -20,32 +20,53 @@ class FritosObject {
 
     /**
      * @param {string} selector - optional
+     *      if no selector: return first ancestor (first ancestor = parent of parent => element -> parent -> first ancestor)
+     *      if selector: return all ancestors that match the selector (until you reach the body)
      * @returns 
      */
     ancestor(selector) {
-        // TODO bíða þanga til kennari svara um ancestor behaviour :DD
-        const ancestor = new Set();
+        let ancestors = [];
 
         this.elements.forEach(a => {
-            let current = a.parentElement;
-            while (current) {
-                if (!selector || current.matches(selector)) {
-                    ancestor.add(current);
+            // start at grandparent (skip parent)
+            let current = a.parentElement ? a.parentElement.parentElement : null;
+
+            // only grandparent if no selector
+            if (!selector) {
+                if (current) ancestors.push(current);
+                return;
+            }
+            
+            while (current && current.tagName.toLowerCase() !== 'body') {
+                if (current.matches(selector)) {
+                    ancestors.push(current);
                 }
                 current = current.parentElement;
             }
         });
 
-        return new FritosObject([...ancestor]);
+        return new FritosObject([...new Set(ancestors)]);
     }
 
 
     /**
-     * @param {object} cssProperties 
-     * @param {object} animationOptions 
+     * @param {object} cssProperties - animation state
+     * @param {object} animationOptions  - how it should animate itself
      */
-    animate(cssProperties, animationOptions) {  // TODO
+    animate(cssProperties = {}, animationOptions = {}) {  // TODO
+        if (animationOptions.duration == null) animationOptions.duration = 0;
 
+        if (typeof normalized.delay === "string") {
+            const s = normalized.delay.trim();
+
+            if (s.endsWith("ms")) {
+                normalized.delay = parseFloat(s);
+            } else if (s.endsWith("s")) {
+                normalized.delay = parseFloat(s) * 1000;
+            } else {
+                normalized.delay = parseFloat(s); // fallback
+            }
+        }
     }
 
 
@@ -53,12 +74,15 @@ class FritosObject {
      * @param {string} selector 
      * @returns {FritosObject}
      */
-    find(selector) {  // TODO
+    find(selector) {
+        // TODO
         // return new FritosObject([...new Set(parents)]);
+        return null;
     }
 
     onEvent(eventType, eventFunction) {  // TODO
 
+        return null;
     }
 
     /**
@@ -67,39 +91,46 @@ class FritosObject {
      */
     remoteCall(externalURL, HTTPRequestOptions) {  // TODO
 
+        return null;
     }
 
 
     validation(someParameters) { // TODO
 
+        return null;
     }
 
 
     hide() {
         // TODO
+        return null;
     }
 
     prune() {
         // TODO
+        return null;
     }
 
 
     /**
      * @param {int} level - default 1
      */
-    raise(level) { // TODO
+    raise(level = 1) { // TODO
 
-    }
+        return null;
+    };
 
     attrs(attributeName, value) { // TODO
 
-    }
+        return null;
+    };
 
     /**
      * @param {*} value - optional
      */
     val(value) {
         // TODO
+        return null;
     }
 }
 
@@ -123,7 +154,7 @@ console.log(parent.elements);
 console.log(unknownParent.elements);
 
 // 5. ANCESTOR
-const ancestor1 = fritos('.item-image').ancestor(); // Returns the first ancestor <div class="item"></div>
+const ancestor1 = fritos('.item-image').ancestor(); // Returns the first ancestor <div class="items"></div>
 const ancestor2 = fritos('.item-image').ancestor('main')  // Returns the ancestor <main></main>
 
 console.log(ancestor1.elements);
