@@ -59,6 +59,7 @@ fritos('form .form-group input[type="input"]').onEvent("input", function (evt) {
 });
 
 // 9. REMOTE CALL
+console.log("9. REMOTE CALL");
 fritos.remoteCall("https://example.com/api/client", {
   // GET, PUT, POST, PATCH, DELETE, HEAD, CONNECT, OPTIONS, TRACE, PATH
   method: "POST",
