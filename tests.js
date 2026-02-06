@@ -79,9 +79,11 @@ fritos.remoteCall("https://example.com/api/client", {
   // A success function which is called if the HTTP request was successful
   onSuccess: function (data) {
     // TODO: Use data
+    console.log("Success:", data);
   },
   // An error function which is called if the HTTP request encountered an error
   onError: function (err) {
     // TODO: Handle error
+    console.error("Error:", err);
   },
 });
