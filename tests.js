@@ -90,3 +90,42 @@ fritos.remoteCall(
     },
   },
 );
+
+// 10. FIND
+console.log("10. VALIDATION");
+const result = fritos("#user-credentials").validation({
+  "email-address": [
+    {
+      message: "The email address is required",
+      valid: (value) => value.length > 0,
+    },
+    {
+      message: "The email address must be correctly formatted",
+      // Regex to check if the email address is correctly formatted
+      valid: (value) =>
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/g.test(value),
+    },
+  ],
+  password: [
+    {
+      message:
+        "The password must contain at least one character, number and special character",
+
+      valid: (value) =>
+        // Regex to check if string is more than 8 in length contains
+        // at least one character, number and special character
+        /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{8,}$/g.test(value),
+    },
+  ],
+  "confirm-password": [
+    {
+      message: "The confirm password must match the password",
+      valid: (value, parent) => {
+        const password = parent.querySelector('input[name="password"]').value;
+        return value === password.value;
+      },
+    },
+  ],
+});
+
+console.log(result);
