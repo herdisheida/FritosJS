@@ -50,62 +50,46 @@ class FritosObject {
 
 
     /**
-     * @param {object} cssProperties - animation state
+     * @param {object} cssProperties - animation to state
      * @param {object} options  - how it should animate itself
      *      animationOptions: duration, delay, easing, iterationCount and fillMode
      */
     animate(cssProperties = {}, options = {}) {
+        // normalise options
+        const norm = { ...options };
 
-        // get
-        const easing = options.easing;
-        const fillMode = options.fillMode;
-        
-        // duration in ms, default 0
-        const duration = options.duration ? parseFloat(options.duration) : 0;
+        // duration - (ms)
+        if (norm.duration == null) norm.duration = 0;
 
-        // delay
-        let delay = options.delay.trim();
-        if (typeof delay === "string") {
-            if (delay === "initial" || delay === "inherit") {
-                options.delay = 0; // default to 0 if invalid
-            }           
-        
-            if (delay.endsWith("ms")) {
-                delay = parseFloat(delay);
-            } else if (delay.endsWith("s")) {
-                delay = parseFloat(delay) * 1000;
-            } else if (delay.endsWith("m")) {
-                delay = parseFloat(delay) * 60000;
-            } else {
-                delay = parseFloat(delay); // assume ms if no unit
-            }
-        }
-        
-        let iterationCount = options.iterationCount;
-        if (typeof iterationCount === "string") {
-            if (iterationCount === "infinite") {
-                iterationCount = Infinity;
-            } else if (iterationCount === "initial" || iterationCount === "inherit") {
-                iterationCount = 1;
-            } else {
-                iterationCount = parseFloat(iterationCount);
-            }
+        // delay - '2s' (string) or 2000 (number)
+        if (typeof norm.delay === "string") {
+            const s = norm.delay.trim();
+            if (s.endsWith("ms")) norm.delay = parseFloat(s);
+            else if (s.endsWith("s")) norm.delay = parseFloat(s) * 1000;
+            else norm.delay = parseFloat(s);
         }
 
-        // apply animation
-        this.elements.forEach(el => {
-            el.animate([cssProperties], {
-                duration,
-                delay,
-                easing,
-                iterationCount,
-                fill: fillMode
-            });
+        // change fillmode to fill
+        if (norm.fillMode != null && norm.fill == null) {
+            norm.fill = norm.fillMode;
+            delete norm.fillMode;
+        }
+
+        // @keyframes - from curr style -> to cssProperties
+        this.elements.forEach((el) => {
+
+            const start = {};
+
+            const computed = getComputedStyle(el);
+            for (const prop of Object.keys(cssProperties)) {
+                start[prop] = computed[prop] || "";
+            }
+
+            el.animate([start, cssProperties], norm);
         });
 
-        return this; // for chaining
+        return this; // chainable and keeps original result set
     }
-
 
     /**
      * @param {string} selector 
