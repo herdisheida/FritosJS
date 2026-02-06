@@ -93,14 +93,14 @@ class FritosObject {
   }
 
   /**
-   * @param {string} selector
+   * @param {string} selector - CSS selector
    * @returns {FritosObject}
    */
   find(selector) {
     if (!selector) return new FritosObject([]);
-    const foundElements = this.elements.flatMap((el) =>
-      Array.from(el.querySelectorAll(selector)),
-    );
+    const foundElements = this.elements.flatMap((el) => {
+      Array.from(el.querySelectorAll(selector));
+    });
     return new FritosObject([...new Set(foundElements)]);
   }
 
