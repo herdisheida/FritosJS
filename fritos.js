@@ -51,22 +51,59 @@ class FritosObject {
 
     /**
      * @param {object} cssProperties - animation state
-     * @param {object} animationOptions  - how it should animate itself
+     * @param {object} options  - how it should animate itself
+     *      animationOptions: duration, delay, easing, iterationCount and fillMode
      */
-    animate(cssProperties = {}, animationOptions = {}) {  // TODO
-        if (animationOptions.duration == null) animationOptions.duration = 0;
+    animate(cssProperties = {}, options = {}) {
 
-        if (typeof normalized.delay === "string") {
-            const s = normalized.delay.trim();
+        // get
+        const easing = options.easing;
+        const fillMode = options.fillMode;
+        
+        // duration in ms, default 0
+        const duration = options.duration ? parseFloat(options.duration) : 0;
 
-            if (s.endsWith("ms")) {
-                normalized.delay = parseFloat(s);
-            } else if (s.endsWith("s")) {
-                normalized.delay = parseFloat(s) * 1000;
+        // delay
+        let delay = options.delay.trim();
+        if (typeof delay === "string") {
+            if (delay === "initial" || delay === "inherit") {
+                options.delay = 0; // default to 0 if invalid
+            }           
+        
+            if (delay.endsWith("ms")) {
+                delay = parseFloat(delay);
+            } else if (delay.endsWith("s")) {
+                delay = parseFloat(delay) * 1000;
+            } else if (delay.endsWith("m")) {
+                delay = parseFloat(delay) * 60000;
             } else {
-                normalized.delay = parseFloat(s); // fallback
+                delay = parseFloat(delay); // assume ms if no unit
             }
         }
+        
+        let iterationCount = options.iterationCount;
+        if (typeof iterationCount === "string") {
+            if (iterationCount === "infinite") {
+                iterationCount = Infinity;
+            } else if (iterationCount === "initial" || iterationCount === "inherit") {
+                iterationCount = 1;
+            } else {
+                iterationCount = parseFloat(iterationCount);
+            }
+        }
+
+        // apply animation
+        this.elements.forEach(el => {
+            el.animate([cssProperties], {
+                duration,
+                delay,
+                easing,
+                iterationCount,
+                fill: fillMode
+            });
+        });
+
+        return this; // for chaining
     }
 
 
@@ -164,7 +201,7 @@ console.log(ancestor2.elements);
 
 // 6. ANIMATE
 console.log("6. ANIMATE");
-fritos('.moveable-item').animete({
+fritos('.moveable-item').animate({
     transform: 'translateX(100px)'
 }, {
     // Time in milliseconds
