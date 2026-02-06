@@ -69,8 +69,15 @@ class FritosObject {
             else norm.delay = parseFloat(s);
         }
 
+        // change iterationCount to iterations
+        if (norm.iterationCount != null) {
+            norm.iterations = norm.iterationCount;
+            delete norm.iterationCount;
+        }
+        if (norm.iterations === "infinite") norm.iterations = Infinity;
+
         // change fillmode to fill
-        if (norm.fillMode != null && norm.fill == null) {
+        if (norm.fillMode != null) {
             norm.fill = norm.fillMode;
             delete norm.fillMode;
         }
