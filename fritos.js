@@ -209,3 +209,13 @@ fritos('.moveable-item').animate({
     // none, forwards, backwards, both, initial, inherit
     fillMode: 'none'
 })
+
+
+// 7. FIND
+// Returns 5 <div class="item"></div>
+console.log("7. FIND");
+const item = fritos('.container').find('.item');
+console.log(item.elements);
+
+
+// 
