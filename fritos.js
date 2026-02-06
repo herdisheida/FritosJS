@@ -5,7 +5,6 @@ class FritosObject {
 
   /**
    * @param {string} selector - optional
-   * @returns {FritosObject}
    */
   parent(selector) {
     let parents = this.elements.map((p) => p.parentElement).filter(Boolean);
@@ -20,7 +19,6 @@ class FritosObject {
    * @param {string} selector - optional
    *      if no selector: return first ancestor (first ancestor = parent of parent => element -> parent -> first ancestor)
    *      if selector: return all ancestors that match the selector (until you reach the body)
-   * @returns
    */
   ancestor(selector) {
     let ancestors = [];
@@ -94,7 +92,6 @@ class FritosObject {
 
   /**
    * @param {string} selector - CSS selector
-   * @returns {FritosObject}
    */
   find(selector) {
     if (!selector) return new FritosObject([]);
@@ -104,7 +101,12 @@ class FritosObject {
     return new FritosObject([...new Set(foundElements)]);
   }
 
-  onEvent(eventType, eventFunction) {
+  /**
+   * @param {string} type - event type (e.g., 'click', 'input')
+   * @param {function} func
+   *    add event listener of <type> and execute <func> when event is triggered
+   */
+  onEvent(type, func) {
     // TODO
 
     return null;
