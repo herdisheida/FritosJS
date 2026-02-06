@@ -112,62 +112,6 @@ class FritosObject {
     return this; // chainable
   }
 
-  /**
-   * @param {string} url
-   * @param {object} options - HTTP request options:  method, timeout, headers, body, onSuccess, onError.
-   */
-  remoteCall(url, options = {}) {
-    const {
-      method = "GET",
-      timeout = 45, // default 45s
-      headers = {},
-      body,
-      onSuccess = () => {},
-      onError = () => {},
-    } = options;
-
-    // abort controller to cancel fetch on timeout
-    const controller = new AbortController();
-    const signal = controller.signal;
-    const timeoutMs = Number(timeout) * 1000; // sec to ms
-    const timerId = setTimeout(() => {
-      controller.abort(); // abort fetch
-    }, timeoutMs);
-
-    fetch(url, { method, headers, body, signal })
-      .then(async (res) => {
-        clearTimeout(timerId);
-
-        // non 2xx status code is an error
-        if (!res.ok) {
-          const text = await res.text().catch(() => "");
-          const err = new Error(`HTTP ${res.status} ${res.statusText}`);
-          err.status = res.status;
-          err.body = text;
-          throw err;
-        }
-
-        // returning resp body
-        const contentType = res.headers.get("content-type") || "";
-        if (contentType.includes("application/json")) return res.json();
-        else return res.text();
-      })
-
-      .then((data) => {
-        onSuccess(data);
-      })
-
-      .catch((err) => {
-        clearTimeout(timerId);
-        // timeout errors
-        if (err.name === "AbortError") {
-          onError(new Error(`Request timed out after ${timeout} seconds`));
-          return;
-        }
-        onError(err);
-      });
-  }
-
   validation(someParameters) {
     // TODO
 
@@ -212,5 +156,61 @@ function fritos(selector) {
   const result = document.querySelectorAll(selector);
   return new FritosObject(result);
 }
+
+/**
+ * @param {string} url
+ * @param {object} options - HTTP request options:  method, timeout, headers, body, onSuccess, onError.
+ */
+fritos.remoteCall = function remoteCall(url, options = {}) {
+  const {
+    method = "GET",
+    timeout = 45, // default 45s
+    headers = {},
+    body,
+    onSuccess = () => {},
+    onError = () => {},
+  } = options;
+
+  // abort controller to cancel fetch on timeout
+  const controller = new AbortController();
+  const signal = controller.signal;
+  const timeoutMs = Number(timeout) * 1000; // sec to ms
+  const timerId = setTimeout(() => {
+    controller.abort(); // abort fetch
+  }, timeoutMs);
+
+  fetch(url, { method, headers, body, signal })
+    .then(async (res) => {
+      clearTimeout(timerId);
+
+      // non 2xx status code is an error
+      if (!res.ok) {
+        const text = await res.text().catch(() => "");
+        const err = new Error(`HTTP ${res.status} ${res.statusText}`);
+        err.status = res.status;
+        err.body = text;
+        throw err;
+      }
+
+      // returning resp body
+      const contentType = res.headers.get("content-type") || "";
+      if (contentType.includes("application/json")) return res.json();
+      else return res.text();
+    })
+
+    .then((data) => {
+      onSuccess(data);
+    })
+
+    .catch((err) => {
+      clearTimeout(timerId);
+      // timeout errors
+      if (err.name === "AbortError") {
+        onError(new Error(`Request timed out after ${timeout} seconds`));
+        return;
+      }
+      onError(err);
+    });
+};
 
 window.fritos = fritos;
