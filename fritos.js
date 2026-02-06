@@ -112,10 +112,19 @@ class FritosObject {
     return this; // chainable
   }
 
-  validation(someParameters) {
-    // TODO
+  /**
+   * @rules {object} rules - validation rules
+   *    example param: { email: true, minLength: 5 }
+   * @returns
+   */
+  validation(rules = {}) {
+    if (this.elements.length === 0) return null;
+    if (this.elements[0].children.length === 0) return null; // has to have children
 
-    return null;
+    // only validate first element in result set
+    const el = this.elements[0];
+    const value = el.value || "";
+
     // no chaining after
   }
 
