@@ -98,9 +98,9 @@ class FritosObject {
    */
   find(selector) {
     if (!selector) return new FritosObject([]);
-    const foundElements = this.elements.flatMap((el) => {
-      Array.from(el.querySelectorAll(selector));
-    });
+    const foundElements = this.elements.flatMap((el) =>
+      Array.from(el.querySelectorAll(selector)),
+    );
     return new FritosObject([...new Set(foundElements)]);
   }
 
