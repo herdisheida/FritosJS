@@ -118,6 +118,10 @@ class FritosObject {
    */
   remoteCall(url, options) {
     // TODO
+    norm = { ...options };
+
+    // timout specified in seconds (default 45s)
+    norm.timeout = norm.timeout != null ? norm.timeout * 1000 : 45000;
 
     return null;
   }
