@@ -107,9 +107,8 @@ class FritosObject {
    *    add event listener of <type> and execute <func> when event is triggered
    */
   onEvent(type, func) {
-    // TODO
-
-    return null;
+    this.elements.forEach((el) => el.addEventListener(type, func));
+    return this; // chainable
   }
 
   /**
