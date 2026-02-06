@@ -57,3 +57,30 @@ fritos('form .form-group input[type="input"]').onEvent("input", function (evt) {
     { duration: 500, fill: "forwards" },
   );
 });
+
+// 9. REMOTE CALL
+fritos.remoteCall("https://example.com/api/client", {
+  // GET, PUT, POST, PATCH, DELETE, HEAD, CONNECT, OPTIONS, TRACE, PATH
+  method: "POST",
+  // The timeout specified in seconds (defaults to 45)
+  timeout: 45,
+  // An object representing the headers associated with the HTTP request
+  headers: {
+    "Accept-Language": "is-IS",
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+  // A request body (in this case parsed as JSON)
+  body: JSON.stringify({
+    id: 1,
+    name: "John Doe",
+  }),
+  // A success function which is called if the HTTP request was successful
+  onSuccess: function (data) {
+    // TODO: Use data
+  },
+  // An error function which is called if the HTTP request encountered an error
+  onError: function (err) {
+    // TODO: Handle error
+  },
+});
