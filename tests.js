@@ -50,4 +50,10 @@ console.log("8. ON EVENT");
 fritos('form .form-group input[type="input"]').onEvent("input", function (evt) {
   // This will print out the
   console.log(evt.target.value);
+
+  // extra test höhöh
+  evt.target.animate(
+    [{ transform: "translateX(0px)" }, { transform: "translateX(100px)" }],
+    { duration: 500, fill: "forwards" },
+  );
 });
