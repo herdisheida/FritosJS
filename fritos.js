@@ -116,6 +116,7 @@ class FritosObject {
     // TODO
 
     return null;
+    // no chaining after
   }
 
   hide() {
@@ -211,6 +212,7 @@ fritos.remoteCall = function remoteCall(url, options = {}) {
       }
       onError(err);
     });
+  // no chaining
 };
 
 window.fritos = fritos;
