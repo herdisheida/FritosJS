@@ -214,4 +214,9 @@ console.log("7. FIND");
 const item = fritos(".container").find(".item");
 console.log(item.elements);
 
-//
+// 8. ON EVENT
+console.log("8. ON EVENT");
+fritos('form .form-group input[type="input"]').onEvent("input", function (evt) {
+  // This will print out the
+  console.log(evt.target.value);
+});
