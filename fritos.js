@@ -193,10 +193,13 @@ console.log(ancestor2.elements);
 // 6. ANIMATE
 console.log("6. ANIMATE");
 fritos('.moveable-item').animate({
-    transform: 'translateX(100px)'
+    transform: 'translateX(100px)',
+    backgroundColor: 'red',
+    color: 'white',
+    fontSize: '2rem'
 }, {
     // Time in milliseconds
-    duration: 1000,
+    duration: 5000,
     // time, 'initial', 'inherit'
     delay: '2s',
     // ease, linear, ease-in, ease-in-out, cubic-bezier(n, n, n, n)
