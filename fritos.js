@@ -114,9 +114,9 @@ class FritosObject {
 
   /**
    * @param {string} url
-   * @param {*} requestOption - HTTP request options:  method, timeout, headers, body, onSuccess, onError.
+   * @param {*} options - HTTP request options:  method, timeout, headers, body, onSuccess, onError.
    */
-  remoteCall(url, requestOption) {
+  remoteCall(url, options) {
     // TODO
 
     return null;
