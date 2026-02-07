@@ -91,7 +91,7 @@ fritos.remoteCall(
   },
 );
 
-// 10. FIND
+// 10. VALIDATION
 console.log("10. VALIDATION");
 const form = document.querySelector("#user-credentials");
 const rules = {
