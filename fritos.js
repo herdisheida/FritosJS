@@ -205,8 +205,8 @@ class FritosObject {
   }
 
   /**
-   * @param {*} name -
-   * @param {*} value -
+   * @param {string} name - attribute name
+   * @param {*} value - attribute value
    *    the attribute name provided should be added or replaced by the new value after the method has executed
    */
   attrs(name, value) {
