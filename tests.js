@@ -93,7 +93,8 @@ fritos.remoteCall(
 
 // 10. FIND
 console.log("10. VALIDATION");
-const result = fritos("#user-credentials").validation({
+const form = document.querySelector("#user-credentials");
+const rules = {
   "email-address": [
     {
       message: "The email address is required",
@@ -121,14 +122,20 @@ const result = fritos("#user-credentials").validation({
     {
       message: "The confirm password must match the password",
       valid: (value, parent) => {
-        const password = parent.querySelector('input[name="password"]').value;
+        const password = parent.querySelector('input[name="password"]');
         return value === password.value;
       },
     },
   ],
-});
+};
 
-console.log(result);
+// stop reload
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const result = fritos("#user-credentials").validation(rules);
+  console.log("validation result:", result);
+});
 
 // 11. HIDE
 // Hides all elements
