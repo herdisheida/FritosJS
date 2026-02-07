@@ -129,3 +129,7 @@ const result = fritos("#user-credentials").validation({
 });
 
 console.log(result);
+
+// 11. HIDE
+// Hides all elements
+fritos(".item").hide();
