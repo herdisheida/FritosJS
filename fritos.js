@@ -114,7 +114,15 @@ class FritosObject {
 
   /**
    * @rules {object} rules - validation rules
-   *    example param: { email: true, minLength: 5 }
+   *    example:
+   *    rules = {
+   *               email: [
+   *                {
+   *                    message: "some error msg",
+   *                    valid: (value) => value.length > 0
+   *                }
+   *            ]
+   *          }
    */
   validation(rules = {}) {
     // only use first element in result set
@@ -124,8 +132,8 @@ class FritosObject {
     // find validatable children inside the form
     const fields = root.querySelectorAll("input, textarea, select");
 
-    // empty if validate success - error msg if validate fail
-    const result = {};
+    // empty if success
+    const result = {}; // error msg per field
 
     fields.forEach((field) => {
       // get field name and rules
