@@ -1,4 +1,5 @@
 // TESTING
+console.log("TESTING fritos.js");
 
 // 4. PARENT
 const parent = fritos('input[type="password"]').parent();
@@ -161,3 +162,5 @@ fritos("input[type='text'].input-val").val("value change with val() method");
 // Returns the value of the first matching element.
 const value = fritos('input[type="text"].input-val').val();
 console.log("Value of first input[type='text'].input-val:", value);
+
+console.log("All tests completed |o.o|");

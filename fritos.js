@@ -235,6 +235,7 @@ class FritosObject {
 }
 
 function fritos(selector) {
+  if (typeof selector !== "string") return new FritosObject([]);
   const result = document.querySelectorAll(selector);
   return new FritosObject(result);
 }
