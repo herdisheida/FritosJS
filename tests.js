@@ -153,3 +153,10 @@ fritos(".input-raise").raise(2);
 // 14. ATTRS
 console.log("14. ATTRS");
 fritos("form .form-group input-attrs").attrs("name", "input");
+
+// 15. VAL
+console.log("15. VAL");
+// Updates all values for the matching elements
+fritos("input[type='text']").val("Default value");
+// Returns the value of the first matching element.
+const value = fritos('input[type="text"]').val();
