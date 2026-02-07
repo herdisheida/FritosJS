@@ -176,7 +176,7 @@ class FritosObject {
 
       parent.replaceWith(child); //remove parent, replace it with child
     });
-    return new FritosObject([...new Set(this.elements)]);
+    return this;
   }
 
   /**
@@ -211,7 +211,6 @@ class FritosObject {
    */
   attrs(name, value) {
     if (!name || value === undefined) return this;
-    console.log("setting attr", name, "to", value);
     this.elements.forEach((el) => {
       el.setAttribute(name, value);
     });
