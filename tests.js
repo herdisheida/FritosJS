@@ -9,8 +9,8 @@ console.log(parent.elements);
 console.log(unknownParent.elements);
 
 // 5. ANCESTOR
-const ancestor1 = fritos(".item-image").ancestor(); // Returns the first ancestor <div class="items"></div>
-const ancestor2 = fritos(".item-image").ancestor("main"); // Returns the ancestor <main></main>
+const ancestor1 = fritos(".item-image.ancestor").ancestor(); // Returns the first ancestor <div class="items"></div>
+const ancestor2 = fritos(".item-image.ancestor").ancestor("main"); // Returns the ancestor <main></main>
 
 console.log("5. ANCESTOR");
 console.log(ancestor1.elements);
@@ -42,7 +42,7 @@ fritos(".moveable-item").animate(
 // 7. FIND
 // Returns 5 <div class="item"></div>
 console.log("7. FIND");
-const item = fritos(".container").find(".item");
+const item = fritos(".container.find").find(".item.find");
 console.log(item.elements);
 
 // 8. ON EVENT
@@ -139,4 +139,4 @@ form.addEventListener("submit", (e) => {
 
 // 11. HIDE
 // Hides all elements
-// fritos(".item").hide();
+fritos(".item.hide").hide();
