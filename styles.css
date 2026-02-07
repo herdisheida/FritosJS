@@ -1,3 +1,12 @@
+/* outside test (page-format) */
+body {
+  background-color: aliceblue;
+}
+.title {
+  text-align: center;
+}
+
+/* test format  */
 .tests {
   background-color: lightsteelblue;
   margin: 2rem 10rem;
@@ -7,6 +16,7 @@
   justify-items: center;
 }
 
+/* blocks in tests */
 .items {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -17,7 +27,6 @@
   padding: 1rem;
   border: solid black 2px;
 }
-
 .form-group {
   display: flex;
   flex-direction: column;
