@@ -157,8 +157,10 @@ class FritosObject {
   }
 
   hide() {
-    // TODO
-    return null;
+    this.elements.forEach((el) => {
+      el.style.display = "none";
+    });
+    return this;
   }
 
   prune() {

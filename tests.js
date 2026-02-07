@@ -139,4 +139,4 @@ form.addEventListener("submit", (e) => {
 
 // 11. HIDE
 // Hides all elements
-fritos(".item").hide();
+// fritos(".item").hide();

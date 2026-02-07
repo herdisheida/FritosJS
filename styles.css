@@ -6,3 +6,14 @@
 
   justify-items: center;
 }
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+.item {
+  background-color: tomato;
+  padding: 1rem;
+  border: solid black 2px;
+}
