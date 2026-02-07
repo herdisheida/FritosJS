@@ -152,7 +152,7 @@ fritos(".input-raise").raise(2);
 
 // 14. ATTRS
 console.log("14. ATTRS");
-fritos("form .form-group input-attrs").attrs("name", "input");
+fritos("form .form-group .input-attrs").attrs("name", "input");
 
 // 15. VAL
 console.log("15. VAL");

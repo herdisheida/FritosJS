@@ -204,10 +204,20 @@ class FritosObject {
     return this;
   }
 
-  attrs(attributeName, value) {
-    if (!attributeName || value === undefined) return this;
+  /**
+   * @param {*} name -
+   * @param {*} value -
+   *    the attribute name provided should be added or replaced by the new value after the method has executed
+   */
+  attrs(name, value) {
+    if (!name || value === undefined) return this;
 
-    return null;
+    console.log("setting attr", name, "to", value);
+    this.elements.forEach((el) => {
+      el.setAttribute(name, value);
+    });
+
+    return this;
   }
 
   /**
