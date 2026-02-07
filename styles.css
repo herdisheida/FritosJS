@@ -11,10 +11,12 @@ body {
   background-color: lightsteelblue;
   margin: 2rem 10rem;
   padding: 2rem;
-  border: solid black 5px;
+  border: solid #536884 5px;
   border-radius: 1rem;
 
   justify-items: center;
+
+  box-shadow: #6782a6 0px 0px 1rem 1px;
 }
 
 /* blocks in tests */
