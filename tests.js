@@ -81,7 +81,7 @@ fritos.remoteCall(
     // A success function which is called if the HTTP request was successful
     onSuccess: function (data) {
       // TODO: Use data
-      console.log("Success:", data);
+      console.log("Remote Call Success:", data);
     },
     // An error function which is called if the HTTP request encountered an error
     onError: function (err) {
