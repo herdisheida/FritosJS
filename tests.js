@@ -144,4 +144,4 @@ fritos(".item.hide").hide();
 
 // 12. PRUNE
 console.log("12. PRUNE");
-fritos('input[type="text"]').prune();
+fritos(".input-prune").prune();
