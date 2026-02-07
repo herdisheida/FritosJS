@@ -50,30 +50,30 @@ class FritosObject {
    */
   animate(cssProperties = {}, options = {}) {
     // normalise options
-    const norm = { ...options };
+    const op_copy = { ...options };
 
     // duration - (ms)
-    if (norm.duration == null) norm.duration = 0;
+    if (op_copy.duration == null) op_copy.duration = 0;
 
     // delay - '2s' (string) or 2000 (number)
-    if (typeof norm.delay === "string") {
-      const s = norm.delay.trim();
-      if (s.endsWith("ms")) norm.delay = parseFloat(s);
-      else if (s.endsWith("s")) norm.delay = parseFloat(s) * 1000;
-      else norm.delay = parseFloat(s);
+    if (typeof op_copy.delay === "string") {
+      const s = op_copy.delay.trim();
+      if (s.endsWith("ms")) op_copy.delay = parseFloat(s);
+      else if (s.endsWith("s")) op_copy.delay = parseFloat(s) * 1000;
+      else op_copy.delay = parseFloat(s);
     }
 
     // change iterationCount to iterations
-    if (norm.iterationCount != null) {
-      norm.iterations = norm.iterationCount;
-      delete norm.iterationCount;
+    if (op_copy.iterationCount != null) {
+      op_copy.iterations = op_copy.iterationCount;
+      delete op_copy.iterationCount;
     }
-    if (norm.iterations === "infinite") norm.iterations = Infinity;
+    if (op_copy.iterations === "infinite") op_copy.iterations = Infinity;
 
     // change fillmode to fill
-    if (norm.fillMode != null) {
-      norm.fill = norm.fillMode;
-      delete norm.fillMode;
+    if (op_copy.fillMode != null) {
+      op_copy.fill = op_copy.fillMode;
+      delete op_copy.fillMode;
     }
 
     // @keyframes - from curr style -> to cssProperties
@@ -85,7 +85,7 @@ class FritosObject {
         start[prop] = computed[prop] || "";
       }
 
-      el.animate([start, cssProperties], norm);
+      el.animate([start, cssProperties], op_copy);
     });
     return this; // chainable and keeps original result set
   }
@@ -180,12 +180,29 @@ class FritosObject {
   }
 
   /**
-   * @param {int} level - default 1
+   * @param {int} level - number of lvl to raise el up the DOM
    */
   raise(level = 1) {
-    // TODO
+    level = Number(level);
+    if (!Number.isFinite(level) || !Number.isInteger(level) || level < 1)
+      return this;
 
-    return null;
+    const elems_copy = [...this.elements];
+    elems_copy.forEach((el) => {
+      let current = el;
+
+      for (let i = 0; i < level; i++) {
+        const parent = current.parentElement;
+        if (!parent) break;
+
+        const grandParent = parent.parentElement;
+        if (!grandParent) break;
+
+        // move elem in front of parent (siblings)
+        grandParent.insertBefore(current, parent);
+      }
+    });
+    return this;
   }
 
   attrs(attributeName, value) {
