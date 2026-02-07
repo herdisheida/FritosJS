@@ -291,7 +291,7 @@ fritos.remoteCall = function remoteCall(url, options = {}) {
       clearTimeout(timerId);
       // timeout errors
       if (err.name === "AbortError") {
-        onError(new Error(`Request timed out after ${timeout} seconds`));
+        onError(new Error(`Abort Error - timeout: ${timeout} seconds`));
         return;
       }
       onError(err);
