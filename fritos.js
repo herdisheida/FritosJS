@@ -33,10 +33,9 @@ class FritosObject {
         return;
       }
 
-      while (current && current.tagName.toLowerCase() !== "body") {
-        if (current.matches(selector)) {
-          ancestors.push(current);
-        }
+      while (current) {
+        if (current.matches(selector)) ancestors.push(current);
+        if (current.tagName.toLowerCase() === "body") break; // go up until body
         current = current.parentElement;
       }
     });
