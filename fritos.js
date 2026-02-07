@@ -138,12 +138,14 @@ class FritosObject {
     fields.forEach((field) => {
       // get field name and rules
       const name = field.name;
-      if (!name || !rules[name]) return;
+      if (!name) return;
 
       const fieldRules = rules[name];
+      if (!Array.isArray(fieldRules)) return;
+
       for (const rule of fieldRules) {
         if (typeof rule.valid === "function") {
-          const isValid = rule.valid(field.value, field.parentElement.value);
+          const isValid = rule.valid(field.value, root, field);
           if (!isValid) {
             result[name] = rule.message;
             break;
@@ -151,7 +153,6 @@ class FritosObject {
         }
       }
     });
-
     return result; // no chainable after
   }
 
