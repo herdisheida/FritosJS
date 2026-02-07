@@ -211,20 +211,19 @@ class FritosObject {
    */
   attrs(name, value) {
     if (!name || value === undefined) return this;
-
     console.log("setting attr", name, "to", value);
     this.elements.forEach((el) => {
       el.setAttribute(name, value);
     });
-
     return this;
   }
 
   /**
    * @param {*} value - optional
+   *    if value: el should be updated with provided value
+   *    if no value: return the value of the first element in the result set
    */
   val(value) {
-    // TODO
     return null;
   }
 }
