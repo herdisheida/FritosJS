@@ -53,7 +53,7 @@ fritos('form .form-group input[type="input"]').onEvent("input", function (evt) {
 
   // extra test höhöh
   evt.target.animate(
-    [{ transform: "translateX(0px)" }, { transform: "translateX(100px)" }],
+    [{ transform: "translateY(0px)" }, { transform: "translateY(100px)" }],
     { duration: 500, fill: "forwards" },
   );
 });
