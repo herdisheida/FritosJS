@@ -224,14 +224,16 @@ class FritosObject {
    *    if no value: return the value of the first element in the result set
    */
   val(value) {
+    // set value
     if (value !== undefined) {
       this.elements.forEach((el) => {
         el.value = value;
       });
       return this;
-    } else {
-      return this.elements[0] ? this.elements[0].value : undefined;
     }
+
+    // get value of first element
+    return this.elements[0] ? this.elements[0].value : undefined;
   }
 }
 
