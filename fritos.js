@@ -194,7 +194,6 @@ class FritosObject {
       for (let i = 0; i < level; i++) {
         const parent = current.parentElement;
         if (!parent) break;
-
         const grandParent = parent.parentElement;
         if (!grandParent) break;
 

@@ -148,4 +148,4 @@ fritos(".input-prune").prune();
 
 // 13. RAISE
 console.log("13. RAISE");
-fritos(".input-raise").raise(1.5);
+fritos(".input-raise").raise(2);
