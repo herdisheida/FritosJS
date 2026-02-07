@@ -115,17 +115,36 @@ class FritosObject {
   /**
    * @rules {object} rules - validation rules
    *    example param: { email: true, minLength: 5 }
-   * @returns
    */
   validation(rules = {}) {
-    if (this.elements.length === 0) return null;
-    if (this.elements[0].children.length === 0) return null; // has to have children
+    // only use first element in result set
+    const root = this.elements[0];
+    if (!root || root.children.length === 0) return null;
 
-    // only validate first element in result set
-    const el = this.elements[0];
-    const value = el.value || "";
+    // find validatable children inside the form
+    const fields = root.querySelectorAll("input, textarea, select");
 
-    // no chaining after
+    // empty if validate success - error msg if validate fail
+    const result = {};
+
+    fields.forEach((field) => {
+      // get field name and rules
+      const name = field.name;
+      if (!name || !rules[name]) return;
+
+      const fieldRules = rules[name];
+      for (const rule of fieldRules) {
+        if (typeof rule.valid === "function") {
+          const isValid = rule.valid(field.value, field.parentElement.value);
+          if (!isValid) {
+            result[name] = rule.message;
+            break;
+          }
+        }
+      }
+    });
+
+    return result; // no chainable after
   }
 
   hide() {
