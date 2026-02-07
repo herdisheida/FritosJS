@@ -126,7 +126,7 @@ class FritosObject {
   validation(rules = {}) {
     // only use first element in result set
     const root = this.elements[0];
-    if (!root || root.children.length === 0) return null;
+    if (!root) return null;
 
     // find validatable children inside the form
     const fields = root.querySelectorAll("input, textarea, select");
