@@ -3,4 +3,6 @@
   margin: 2rem;
   padding: 2rem;
   border: solid black 5px;
+
+  justify-items: center;
 }
