@@ -205,7 +205,7 @@ class FritosObject {
   }
 
   attrs(attributeName, value) {
-    // TODO
+    if (!attributeName || value === undefined) return this;
 
     return null;
   }
