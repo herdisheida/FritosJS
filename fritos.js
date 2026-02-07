@@ -168,7 +168,7 @@ class FritosObject {
    *  therefore pruning the elements up the tree by taking their parents place.
    */
   prune() {
-    const whatsLeft = this.elements.forEach((el) => {
+    this.elements.forEach((el) => {
       const child = el;
 
       if (!child.parentNode) return; // no parent, can't prune
@@ -176,7 +176,7 @@ class FritosObject {
 
       parent.replaceWith(child); //remove parent, replace it with child
     });
-    return whatsLeft; // chainable
+    return new FritosObject([...new Set(this.elements)]);
   }
 
   /**

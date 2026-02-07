@@ -145,3 +145,5 @@ fritos(".item.hide").hide();
 // 12. PRUNE
 console.log("12. PRUNE");
 fritos(".input-prune").prune();
+
+// 13. RAISE
