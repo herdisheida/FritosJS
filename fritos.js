@@ -176,7 +176,7 @@ class FritosObject {
 
       parent.replaceWith(child); //remove parent, replace it with child
     });
-    return this;
+    return whatsLeft; // chainable
   }
 
   /**

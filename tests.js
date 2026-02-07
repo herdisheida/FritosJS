@@ -139,8 +139,9 @@ form.addEventListener("submit", (e) => {
 
 // 11. HIDE
 // Hides all elements
+console.log("11. HIDE");
 fritos(".item.hide").hide();
 
 // 12. PRUNE
-// fritos("input[type='text']").prune();
-fritos(".prune").prune();
+console.log("12. PRUNE");
+fritos('input[type="text"]').prune();
